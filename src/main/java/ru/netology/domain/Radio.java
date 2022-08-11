@@ -2,67 +2,82 @@ package ru.netology.domain;
 
 public class Radio {
     private int currentRadioStation;
+    private int minRadioStation;
+    private int maxRadioStation = 10;
     private int currentVolume;
+    private int minCurrentVolume;
+    private int maxCurrentVolume = 100;
+
+    public Radio(int currentRadioStation, int maxRadioStation, int currentVolume, int maxCurrentVolume) {
+        this.currentRadioStation = currentRadioStation;
+        this.maxRadioStation = maxRadioStation;
+        this.currentVolume = currentVolume;
+        this.maxCurrentVolume = maxCurrentVolume;
+    }
+
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
     }
 
     public void setCurrentRadioStation(int currentRadioStation) {
-        if (currentRadioStation > 9) {
+        if (currentRadioStation > maxRadioStation) {
             return;
         }
-        if (currentRadioStation < 0) {
+        if (currentRadioStation < minRadioStation) {
             return;
         }
         this.currentRadioStation = currentRadioStation;
     }
 
-    public void changePrevCurrentRadioStation() {
-        if (currentRadioStation == 0) {
-            this.currentRadioStation = 9;
+
+    public void changePrevRadioStation() {
+        if (currentRadioStation == minRadioStation) {
+            this.currentRadioStation = maxRadioStation;
             return;
         }
         this.currentRadioStation--;
     }
 
-    public void changeNextCurrentRadioStation() {
-        if (currentRadioStation == 9) {
-            this.currentRadioStation = 0;
+
+    public void changeNextRadioStation() {
+        if (currentRadioStation == maxRadioStation) {
+            this.currentRadioStation = minRadioStation;
             return;
         }
         this.currentRadioStation++;
     }
+
 
     public int getVolume() {
         return currentVolume;
     }
 
     public void setVolume(int currentVolume) {
-        if (currentVolume > 10) {
+        if (currentVolume < minCurrentVolume) {
             return;
         }
-        if (currentVolume < 0) {
+        if (currentVolume > maxCurrentVolume) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
-    public void increaseVolume() {
-        if (currentVolume == 10) {
-            this.currentVolume= currentVolume;
-        }
-        if (currentVolume < 10) {
-            this.currentVolume++;
-        }
+    public void currentVolumeTop() {
 
-    }
-
-    public void decreaseVolume() {
-        if (currentVolume == 0) {
+        if (currentVolume == maxCurrentVolume) {
             this.currentVolume = currentVolume;
         }
-        if (currentVolume > 0) {
+        if (currentVolume < maxCurrentVolume) {
+            this.currentVolume++;
+        }
+    }
+
+    public void currentVolumeDown() {
+        if (currentVolume == minCurrentVolume) {
+            this.currentVolume = currentVolume;
+        }
+        if (currentVolume > minCurrentVolume) {
             this.currentVolume--;
         }
     }
